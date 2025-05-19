@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Email</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+    <h2>Email Details</h2>
+    <p><strong>From:</strong> {{ email.sender }}</p>
+    <p><strong>Subject:</strong> {{ email.subject }}</p>
+    <hr>
+    <h4>Message:</h4>
+    <p>{{ email.content|safe }}</p>
+
+    <h3>Reply</h3>
+    <form action="{{ url_for('reply_email') }}" method="POST">
+        <input type="hidden" name="to_email" value="{{ email.sender }}">
+        <input type="hidden" name="subject" value="{{ email.subject }}">
+        <textarea name="message" class="form-control" rows="4" placeholder="Your reply here"></textarea>
+        <br>
+        <button type="submit" class="btn btn-success">Send Reply</button>
+    </form>
+
+    <br>
+    <a href="/" class="btn btn-secondary">Back to Emails</a>
+</body>
+</html>
